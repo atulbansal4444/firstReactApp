@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ChartComponent from '../Chart/ChartComponent';
 
 const ExpensesChartComponent = (props) => {

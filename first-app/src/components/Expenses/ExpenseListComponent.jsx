@@ -1,5 +1,6 @@
 import React from 'react';
 import ExpenseItem from './ExpenseItem';
+
 import '../componentStyling/ExpenseList.css';
 
 const ExpenseListComponent = (props) => {
@@ -10,15 +11,19 @@ const ExpenseListComponent = (props) => {
     
     return (
         <ul className='expenses-list'>
-            {props.expenses.map((expense) =>
-                <ExpenseItem
-                    title={expense.title}
-                    id={expense.id}
-                    key={expense.id}
-                    amount={expense.amount}
-                    date={expense.date} />
-            )}
+            {
+                props.expenses
+                    .map(expense =>
+                        <ExpenseItem
+                            title={expense.title}
+                            id={expense.id}
+                            key={expense.id}
+                            amount={expense.amount}
+                            date={expense.date}
+                            updateExpensesFunc={props.updateExpensesFunc} />)
+            }
         </ul>
     )
 }
+
 export default ExpenseListComponent;
