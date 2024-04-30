@@ -13,6 +13,7 @@ const ExpenseListComponent = (props) => {
         <ul className='expenses-list'>
             {
                 props.expenses
+                    .sort((a, b) => b.amount - a.amount)
                     .map(expense =>
                         <ExpenseItem
                             title={expense.title}

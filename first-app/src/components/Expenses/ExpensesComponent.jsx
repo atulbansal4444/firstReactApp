@@ -5,16 +5,16 @@ import ExpenseListComponent from './ExpenseListComponent';
 
 import '../componentStyling/ExpensesComponent.css';
 
-const ExpensesComponent = (props) => {
+const ExpensesComponent = ({ expenses, updateExpensesFunc }) => {
     const [year, setYear] = useState('');
 
     const setFilteredYear = (filteredYear) => {
         setYear(filteredYear);
     };
 
-    const filteredList = props.expenses.filter(expense => {
+    const filteredList = expenses.filter(expense => {
         if (year === '') {
-            return props.expenses;
+            return expenses;
         }
         return expense.date.getFullYear().toString() === year;
     });
@@ -27,7 +27,7 @@ const ExpensesComponent = (props) => {
             <ExpensesChartComponent expenses={filteredList} />
             <ExpenseListComponent
                 expenses={filteredList}
-                updateExpensesFunc={props.updateExpensesFunc} />
+                updateExpensesFunc={updateExpensesFunc} />
         </div>
     );
 }

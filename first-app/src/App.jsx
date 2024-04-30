@@ -1,33 +1,7 @@
 import React, { useState } from 'react';
 import AddExpenseComponent from './components/addExpense/AddExpenseComponent.jsx';
 import ExpensesComponent from './components/Expenses/ExpensesComponent.jsx';
-
-const DUMMY_EXPENSES = [
-    {
-        id: 'e1',
-        title: 'Toilet Paper',
-        amount: 94.12,
-        date: new Date(2020, 7, 14),
-    },
-    {
-        id: 'e2',
-        title: 'New TV',
-        amount: 799.49,
-        date: new Date(2021, 2, 12)
-    },
-    {
-        id: 'e3',
-        title: 'Car Insurance',
-        amount: 294.67,
-        date: new Date(2021, 2, 28),
-    },
-    {
-        id: 'e4',
-        title: 'New Desk (Wooden)',
-        amount: 450,
-        date: new Date(2021, 5, 12),
-    },
-];
+import { DUMMY_EXPENSES } from './components/helperFunc/helper.js';
 
 const App = () => {
     const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
@@ -38,11 +12,24 @@ const App = () => {
         });
     };
 
-    const updateExpenses = (op, id) => {
+    const updateExpenses = (op, id, expenseData) => {
         if (op === 'delete') {
             setExpenses(prevExpenses => {
                 const filteredExpenses = prevExpenses.filter(exp => exp.id !== id);
                 return filteredExpenses;
+            });
+        } else if (op === 'update') {
+            setExpenses(prevExpenses => {
+                return prevExpenses.map(obj => {
+                    if (obj.id === id) {
+                        return {
+                            ...obj,
+                            title: expenseData.title,
+                            amount: expenseData.amount
+                        };
+                    }
+                    return obj;
+                });
             });
         }
     };

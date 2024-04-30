@@ -33,11 +33,28 @@ const CreateExpenseForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        if (!title) {
+            alert('Please enter expense name');
+            return;
+        }
+
+        if (!amount) {
+            alert('Please enter expense amount');
+            return;
+        }
+
+        if (!date) {
+            alert('Please enter expense date');
+            return;
+        }
+
         const expenseData = {
             title: title,
             amount: +amount,
             date: new Date(date)
         };
+
+        console.log(expenseData);
 
         props.onSaveExpanseData(expenseData);
         resetToDefaultValues();
@@ -52,8 +69,8 @@ const CreateExpenseForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="new-expense__controls">
-                <div className="new-expense__control">
+            <div className='new-expense__controls'>
+                <div className='new-expense__control'>
                     <label>Title</label>
                     <input
                         id='name-field'
@@ -61,7 +78,7 @@ const CreateExpenseForm = (props) => {
                         onChange={titleChangeHandler}
                         value={title} />
                 </div>
-                <div className="new-expense__control">
+                <div className='new-expense__control'>
                     <label>Amount</label>
                     <input
                         id='expense-field'
@@ -71,19 +88,19 @@ const CreateExpenseForm = (props) => {
                         value={amount}
                         onChange={amountHandler} />
                 </div>
-                <div className="new-expense__control">
+                <div className='new-expense__control'>
                     <label>Date</label>
                     <input
                         type='date'
                         min='2019-01-01'
-                        max='2022-12-31'
+                        max='2024-12-31'
                         value={date}
                         onChange={dateHandler} />
                 </div>
-                <div className="new-expense__actions">
+                <div className='new-expense__actions'>
                     <button type='button' onClick={props.onCancelClick}> Cancel </button>
                 </div>
-                <div className="new-expense__actions">
+                <div className='new-expense__actions'>
                     <button type='submit'> Add Expense </button>
                 </div>
             </div>
