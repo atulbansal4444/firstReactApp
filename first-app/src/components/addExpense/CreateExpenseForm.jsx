@@ -38,8 +38,8 @@ const CreateExpenseForm = (props) => {
             return;
         }
 
-        if (!amount) {
-            alert('Please enter expense amount');
+        if (!amount || amount < 0) {
+            alert('Please enter valid expense amount');
             return;
         }
 
@@ -53,8 +53,6 @@ const CreateExpenseForm = (props) => {
             amount: +amount,
             date: new Date(date)
         };
-
-        console.log(expenseData);
 
         props.onSaveExpanseData(expenseData);
         resetToDefaultValues();

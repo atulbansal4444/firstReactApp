@@ -15,6 +15,11 @@ const EditExpenseModal = ({ isOpen, closeModal, title, amount, id, updateExpense
             return;
         }
 
+        if (!refAmount || refAmount < 0) {
+            alert('Please enter valid amount value');
+            return;
+        }
+
         updateExpensesFunc('update', id, { amount: refAmount, title: refTitle })
         closeModal();
     };
